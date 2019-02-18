@@ -1,0 +1,9 @@
+.navbar {
+  border-radius: 0;
+}
+
+.row .content {
+  padding: 15px;
+  margin: 10px 0;
+  background-color: #ddd;
+}
