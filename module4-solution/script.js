@@ -99,12 +99,12 @@ WARNING!!! WARNING!!!
   }
 
   var names3 = names.reduce(reducer, initialValue);
-  for (var helloNames in names3.hello) {
-    console.log(names3.hello[helloNames]);
+  for (var helloName in names3.hello) {
+    console.log(names3.hello[helloName]);
   }
 
-  for (var byeNames in names3.bye) {
-    console.log(names3.bye[byeNames]);
+  for (var byeName in names3.bye) {
+    console.log(names3.bye[byeName]);
   }
 })();
 
