@@ -41,7 +41,7 @@
           <div class="form-group">
             <label for="favDish">Favorite Dish (Menu Number)</label>
             <input type="text" class="form-control" id="favDish" name="favDish" placeholder="Favorite Dish (Menu Number)" ng-model="signupCtrl.user.favDish" ng-change="signupCtrl.checkMenuItem(signupCtrl.user.favDish)">
-            <p class="input-error" ng-if="signupCtrl.validMenuItem">
+            <p class="input-error" ng-if="signupCtrl.invalidMenuItem">
               No such menu number exists
             </p>
           </div>
@@ -51,7 +51,7 @@
             </button>
           </div>
         </form>
-        <p ng-if="signup.$pristine && signupCtrl.saved && !signupCtrl.validMenuItem">
+        <p ng-if="signup.$pristine && signupCtrl.saved && !signupCtrl.invalidMenuItem">
           Your information has been saved
         </p>
       </div>

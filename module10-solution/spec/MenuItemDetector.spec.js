@@ -1,4 +1,4 @@
-describe("FavoriteDishExist", function() {
+describe("MenuItemDetector", function() {
   var $controller;
   var MenuService;
   var UserPreferenceService;
@@ -21,24 +21,25 @@ describe("FavoriteDishExist", function() {
       MenuService: MenuService,
       UserPreferenceService: UserPreferenceService
     });
-
-    // itemsWithoutCookies = ['apples', 'pears', 'bananas'];
-    // itemsWithCookies = ['bread', 'milk', 'Cookies'];
   });
 
   it("should be able to detect invalid menu item", function() {
     var shortName = 'ABCD';
-    $httpBackend.whenGET(ApiPath + '/menu_items/' + shortName + '.json');
+    $httpBackend.whenGET(ApiPath + '/menu_items/' + shortName + '.json')
+    .respond(500, '');
 
-    SignupController.getMenuItem().then(function(response) {
-      expect(response.data).toEqual(false);
-    });
-
+    SignupController.checkMenuItem(shortName);
     $httpBackend.flush();
+    expect(SignupController.invalidMenuItem).toBe(true);
   });
 
   it("should be able to detect valid menu item", function() {
-    var result = detectCookie(itemsWithCookies);
-    expect(result).toBe(true);
+    var shortName = 'A1';
+    $httpBackend.whenGET(ApiPath + '/menu_items/' + shortName + '.json')
+    .respond(200, '');
+
+    SignupController.checkMenuItem(shortName);
+    $httpBackend.flush();
+    expect(SignupController.invalidMenuItem).toBe(false);
   });
 });

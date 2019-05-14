@@ -8,15 +8,15 @@
   function SignupController(MenuService, UserPreferenceService) {
     var ctrl = this;
     ctrl.user = {};
-    ctrl.validMenuItem = false;
+    ctrl.invalidMenuItem = false;
     ctrl.saved = false;
 
     ctrl.checkMenuItem = function (shortName) {
       return MenuService.getMenuItem(shortName)
       .then(function () {
-        ctrl.validMenuItem = false;
+        ctrl.invalidMenuItem = false;
       }).catch(function () {
-        ctrl.validMenuItem = true;
+        ctrl.invalidMenuItem = true;
       });
     };
 
