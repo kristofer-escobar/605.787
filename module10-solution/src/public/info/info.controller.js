@@ -4,18 +4,9 @@
   angular.module('public')
   .controller('InfoController', InfoController);
 
-  InfoController.$inject = ['MenuService', 'UserPreferenceService'];
-  function InfoController(MenuService, UserPreferenceService) {
+  InfoController.$inject = ['userPreferences'];
+  function InfoController(userPreferences) {
     var ctrl = this;
-    ctrl.menuNumberInvalid = false;
-    ctrl.saved = false;
-    ctrl.userPreferences = UserPreferenceService.getUserPreferences();
-
-    if (ctrl.userPreferences) {
-      MenuService.getMenuItem(ctrl.userPreferences.favDish)
-      .then(function (menuItem) {
-        ctrl.favMenuItem = menuItem;
-      })
-    }
+    ctrl.userPreferences = userPreferences;
   }
 }) ()

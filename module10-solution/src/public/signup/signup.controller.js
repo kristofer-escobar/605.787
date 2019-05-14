@@ -8,24 +8,20 @@
   function SignupController(MenuService, UserPreferenceService) {
     var ctrl = this;
     ctrl.user = {};
-    ctrl.menuNumberInvalid = false;
+    ctrl.validMenuItem = false;
     ctrl.saved = false;
 
-    ctrl.getMenuItem = function (shortName) {
-      if (shortName) {
-        return MenuService.getMenuItem(shortName)
-        .then(function () {
-          ctrl.menuNumberInvalid = false;
-        }).catch(function () {
-          ctrl.menuNumberInvalid = true;
-        });;
-      }
-
-      ctrl.menuNumberInvalid = false;
+    ctrl.checkMenuItem = function (shortName) {
+      return MenuService.getMenuItem(shortName)
+      .then(function () {
+        ctrl.validMenuItem = false;
+      }).catch(function () {
+        ctrl.validMenuItem = true;
+      });
     };
 
     ctrl.submit = function (form) {
-      ctrl.getMenuItem(ctrl.user.favDish)
+      ctrl.checkMenuItem(ctrl.user.favDish)
       .then(function () {
         UserPreferenceService.setUserPreferences(ctrl.user);
         ctrl.saved = true;

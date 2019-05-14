@@ -1,3 +1,13 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+}
+
 /* HOME PAGE */
 .container .jumbotron {
   box-shadow: 0 0 50px #3F0C1F;
@@ -145,6 +155,12 @@ form[name="signup"] > div button[type="submit"] {
 }
 
 /* END SIGN UP PAGE */
+
+/* INFO PAGE */
+form[name="userInfo"] .menu-item-tile {
+  padding: 0;
+}
+/* END INFO PAGE */
 
 
 /********** Large devices only **********/

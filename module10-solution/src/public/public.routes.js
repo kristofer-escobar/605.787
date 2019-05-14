@@ -51,7 +51,22 @@ function routeConfig ($stateProvider) {
       url: '/info',
       templateUrl: 'src/public/info/info.html',
       controller : 'InfoController',
-      controllerAs: 'infoCtrl'
+      controllerAs: 'infoCtrl',
+      resolve: {
+        userPreferences: ['MenuService', 'UserPreferenceService', function (MenuService, UserPreferenceService) {
+          var userPreferences = UserPreferenceService.getUserPreferences();
+          return userPreferences && userPreferences.favDish ? MenuService.getMenuItem(userPreferences.favDish)
+            .then(function (menuItem) {
+              return {
+                firstName: userPreferences.firstName,
+                lastName: userPreferences.lastName,
+                email: userPreferences.email,
+                phone: userPreferences.phone,
+                favDish: menuItem
+              };
+            }) : null;
+        }]
+      }
     });
 }
 })();
